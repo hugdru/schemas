@@ -108,8 +108,8 @@ properties:
         enum:
         - supported
         - not supported
-        - not applicable: master-slave
-        - not applicable: single threaded
+        - not applicable - master-slave
+        - not applicable - single threaded
     additionalProperties: false
   Query Language:
     type: object
@@ -354,12 +354,14 @@ properties:
           - master-multiple slaves
           - peer-to-peer
       Data Distribution Method:
-        type: string
-        enum:
-        - assigned key ranges to nodes
-        - hash key
-        - consistent hashing
-        - not relevant (single server only)
+        type: array
+        items:
+          type: string
+          enum:
+          - assigned key ranges to nodes
+          - hash key
+          - consistent hashing
+          - not relevant (single server only)
       Automatic Data Rebalancing:
         type: array
         items:
