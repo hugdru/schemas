@@ -49,7 +49,7 @@ properties:
         type: string
         enum:
         - supported
-        - Multi Version Concurrency Control (MVCC)
+        - Multi-Version Concurrency Control (MVCC)
         - not supported - conflicts allowed
       ACID Transactions:
         type: string
@@ -84,15 +84,16 @@ properties:
       Number of Replicas to Write:
         type: string
         enum:
-        - in the client
+        - specified in the client
         - not applicable - master slave
         - not supported
+        - specified in the database configuration
       Writes with Unavailable Replicas:
         type: string
         enum:
         - a rollback at all replicas
-        - no rollback: write returns replication error
-        - hinted handoffs: writes are applied later when a replica recovers
+        - no rollback - write returns replication error
+        - hinted handoffs - writes are applied later when a replica recovers
         - not applicable
       Read from Master Only:
         type: string
@@ -358,7 +359,7 @@ properties:
         - assigned key ranges to nodes
         - hash key
         - consistent hashing
-        - Not relevant (single server only)
+        - not relevant (single server only)
       Automatic Data Rebalancing:
         type: array
         items:
@@ -416,14 +417,14 @@ properties:
           - LDAP
           - Kerberos
           - SSL
-      Server authentication:
+      Server Authentication:
         type: array
         items:
           type: string
           enum:
           - shared keyfile
           - SSL
-          - Not secured
+          - not secured
           - server account credentials
       Credential Store:
         type: string
@@ -439,13 +440,15 @@ properties:
         - supported - enterprise version only
         - supported - requires programmatic extension
       Security Role Options:
-        type: string
-        enum:
-        - not supported
-        - multiple roles per user
-        - role inheritance
-        - default roles
-        - custom roles
+        type: array
+        items:
+          type: string
+          enum:
+          - not supported
+          - multiple roles per user
+          - role inheritance
+          - default roles
+          - custom roles
       Scope of Roles:
         type: array
         items:
@@ -462,12 +465,14 @@ properties:
         - supported
         - not supported
       Logging:
-        type: string
-        enum:
-        - no logging
-        - configurable event logging
-        - fixed event logging
-        - requires external components (e.g. Web Servers)
+        type: array
+        items:
+          type: string
+          enum:
+          - no logging
+          - configurable event logging
+          - fixed event logging
+          - requires external components (e.g. Web Servers)
     additionalProperties: false
   Admin:
     type: object
