@@ -78,14 +78,14 @@ properties:
       Number of Replicas to Read:
         type: string
         enum:
-        - in the client
-        - not applicable - master slave
+        - specified in the client
+        - not applicable - master-slave
         - not supported
       Number of Replicas to Write:
         type: string
         enum:
         - specified in the client
-        - not applicable - master slave
+        - not applicable - master-slave
         - not supported
         - specified in the database configuration
       Writes with Unavailable Replicas:
@@ -429,11 +429,13 @@ properties:
           - not secured
           - server account credentials
       Credential Store:
-        type: string
-        enum:
-        - in database
-        - external file
-        - certificates only
+        type: array
+        items:
+          type: string
+          enum:
+          - in database
+          - external file
+          - certificates only
       Role Based Security:
         type: string
         enum:
