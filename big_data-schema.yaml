@@ -1,0 +1,518 @@
+title: Big Data Architectures and Technologies
+description: Classifies Big Data Technologies according to a set of features
+type: object
+properties:
+  Scalability:
+    type: object
+    properties:
+      Scalable Distribution Architecture:
+        type: array
+        items:
+          type: "string"
+          enum:
+          - replicate complete database only
+          - horizontal partitioning of database
+          - horizontal partitioning and replication
+      Scaling Out - Adding Data Storage Capacity:
+        type: string
+        enum:
+        - automatic data rebalancing
+        - manual data rebalancing
+        - N/A - single server only
+      Request Load Balancing:
+        type: string
+        enum:
+        - fixed connections to a request coordinator
+        - client requests load balanced across coordinators
+        - uses HTTP-based load balancers
+      Granularity of Write Locks:
+        type: string
+        enum:
+        - no locks - conflicts allowed
+        - no locks - optimistic concurrency model
+        - locks on updated objects only
+        - locks on tables/collections
+        - locks on whole database
+        - no locks - single threaded execution
+      Scalable Request Processing Architecture:
+        type: string
+        enum:
+        - fully distributed - any node acts as a coordinator
+        - centralized coordinator, but can be replicated
+        - not scalable (bottleneck)
+        - based on an external load balancer
+    additionalProperties: false
+  Consistency:
+    type: object
+    properties:
+      Object Level Atomic Updates:
+        type: string
+        enum:
+        - supported
+        - Multi Version Concurrency Control (MVCC)
+        - not supported - conflicts allowed
+      ACID Transactions:
+        type: string
+        enum:
+        - supported
+        - lightweight transactions (e.g. compare and set)
+        - not supported
+      Distributed Transactions:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Durable Writes:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Quorum Reads and Writes:
+        type: string
+        enum:
+        - in the client
+        - in the database
+        - in both database and data center
+        - not relevant
+        - not supported
+      Number of Replicas to Read:
+        type: string
+        enum:
+        - in the client
+        - not applicable - master slave
+        - not supported
+      Number of Replicas to Write:
+        type: string
+        enum:
+        - in the client
+        - not applicable - master slave
+        - not supported
+      Writes with Unavailable Replicas:
+        type: string
+        enum:
+        - a rollback at all replicas
+        - no rollback: write returns replication error
+        - hinted handoffs: writes are applied later when a replica recovers
+        - not applicable
+      Read from Master Only:
+        type: string
+        enum:
+        - not applicable - peer to peer
+        - not supported
+        - specified in the client
+        - specified in the database configuration
+        - specified in the application configuration (e.g. Web load balancer)
+      Resolving Write Conflicts:
+        type: string
+        enum:
+        - supported
+        - not supported
+        - not applicable: master-slave
+        - not applicable: single threaded
+    additionalProperties: false
+  Query Language:
+    type: object
+    properties:
+      API-based:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Declarative Query Language:
+        type: string
+        enum:
+        - supported
+        - not supported
+      REST/HTTP-based Queries:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Languages Supported:
+        type: array
+        items:
+          type: string
+          enum:
+          - Java
+          - C#
+          - Python
+          - C/C++
+          - Perl
+          - PHP
+          - Ruby
+          - Scala
+          - Erlang
+          - Javascript
+      Cursor-based Queries:
+        type: string
+        enum:
+        - supported
+        - not supported
+      JOIN-style queries:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Complex Data Types:
+        type: array
+        items:
+          type: string
+          enum:
+          - none
+          - lists
+          - maps
+          - sets
+          - nested structures
+          - arrays
+          - geospatial
+      Restrict Query Result Set Size:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Key Matching Options:
+        type: array
+        items:
+          type: string
+          enum:
+          - exact
+          - partial match
+          - wildcards
+          - regular expressions
+      Sort Options:
+        type: array
+        items:
+          type: string
+          enum:
+          - none
+          - ascending
+          - descending
+      Triggers:
+        type: array
+        items:
+          type: string
+          enum:
+          - not supported
+          - pre-commit
+          - post-commit
+      Data Object Expiry:
+        type: string
+        enum:
+        - supported
+        - not supported
+    additionalProperties: false
+  Data Model:
+    type: object
+    properties:
+      Data Model:
+        type: string
+        enum:
+        - Key-Value
+        - Document
+        - Column
+        - Graph
+        - XML
+        - Object
+        - Relational
+      Fixed Schema:
+        type: string
+        enum:
+        - required
+        - not required
+        - optional
+      Opaque Data Objects:
+        type: string
+        enum:
+        - required
+        - not required
+      Hierarchical Data Objects:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Automatically allocated Primary Key:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Composite Keys:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Secondary Indexes:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Query by Key Ranges:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Query by Partial Keys:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Query by Non-key Values:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Map Reduce API:
+        type: string
+        enum:
+        - builtin
+        - integrated with an external framework
+        - not supported
+      Indexed Text Search:
+        type: string
+        enum:
+        - support in a plug-in (e.g. Solr)
+        - proprietary (database-specific)
+        - not supported
+    additionalProperties: false
+  Data Replication:
+    type: object
+    properties:
+      Replication Architecture:
+        type: string
+        enum:
+        - peer-to-peer
+        - master-slave
+      Replication for Backup:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Replication across Data Centers:
+        type: string
+        enum:
+        - supported by data center aware features
+        - supported by enterprise version only (data center aware)
+        - supported by standard data replication mechanisms
+      Replica Writes:
+        type: array
+        items:
+          type: string
+          enum:
+          - to master replica only
+          - to any replica
+          - to multiple replicas
+          - to specified replica (configurable)
+      Replica Reads:
+        type: array
+        items:
+          type: string
+          enum:
+          - from master replica only
+          - from any replica
+          - from multiple replicas
+          - from specified replica (configurable)
+      Read Repair:
+        type: string
+        enum:
+        - per query
+        - background
+        - not relevant
+        - not supported
+      Automatic Replica Failure Detection:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Automatic Failover:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Automatic New Master Election after Failure:
+        type: string
+        enum:
+        - not relevant
+        - supported
+        - not supported
+      Replica Recovery and Resynchronization:
+        type: string
+        enum:
+        - supported - automatic
+        - performed by administrator
+        - not supported
+    additionalProperties: false
+  Data Distribution:
+    type: object
+    properties:
+      Data Distribution Architecture:
+        type: array
+        items:
+          type: string
+          enum:
+          - single database only
+          - master-single slave
+          - master-multiple slaves
+          - peer-to-peer
+      Data Distribution Method:
+        type: string
+        enum:
+        - assigned key ranges to nodes
+        - hash key
+        - consistent hashing
+        - Not relevant (single server only)
+      Automatic Data Rebalancing:
+        type: array
+        items:
+          type: string
+          enum:
+          - failure triggered
+          - new storage triggered
+          - data growth triggered
+          - schedulable rebalancing
+          - administrative rebalancing tools
+          - no rebalancing (single server only)
+      Physical Data Distribution:
+        type: array
+        items:
+          type: string
+          enum:
+          - single cluster
+          - rack-aware on single cluster
+          - multiple data centers
+      Query Architecture:
+        type: string
+        enum:
+        - centralized coordinator for shard key lookup
+        - distributed coordinator for shard key lookup
+        - direct shard connection only (resolved in client)
+        - external load balancer required
+      Queries using Non-Shard Key Value:
+        type: array
+        items:
+          type: string
+          enum:
+          - not supported
+          - secondary indexes
+          - non-indexed (scan)
+      Merging Query Results from Multiple Shards:
+        type: array
+        items:
+          type: string
+          enum:
+          - random order
+          - sorted order
+          - paged from server
+          - not supported
+    additionalProperties: false
+  Security:
+    type: object
+    properties:
+      Client Authentication:
+        type: array
+        items:
+          type: string
+          enum:
+          - custom user/password
+          - X509
+          - LDAP
+          - Kerberos
+          - SSL
+      Server authentication:
+        type: array
+        items:
+          type: string
+          enum:
+          - shared keyfile
+          - SSL
+          - Not secured
+          - server account credentials
+      Credential Store:
+        type: string
+        enum:
+        - in database
+        - external file
+        - certificates only
+      Role Based Security:
+        type: string
+        enum:
+        - supported
+        - not supported
+        - supported - enterprise version only
+        - supported - requires programmatic extension
+      Security Role Options:
+        type: string
+        enum:
+        - not supported
+        - multiple roles per user
+        - role inheritance
+        - default roles
+        - custom roles
+      Scope of Roles:
+        type: array
+        items:
+          type: string
+          enum:
+          - cluster
+          - database
+          - collection
+          - object
+          - field
+      Database Encryption:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Logging:
+        type: string
+        enum:
+        - no logging
+        - configurable event logging
+        - fixed event logging
+        - requires external components (e.g. Web Servers)
+    additionalProperties: false
+  Admin:
+    type: object
+    properties:
+      Configuration Files:
+        type: string
+        enum:
+        - single
+        - multiple
+      Node command line access:
+        type: string
+        enum:
+        - authenticated
+        - non-authenticated
+        - not supported
+      Node addition/removal:
+        type: array
+        items:
+          type: string
+          enum:
+          - centralized tool
+          - single file
+          - multiple files
+      Cluster monitoring:
+        type: array
+        items:
+          type: string
+          enum:
+          - real-time
+          - snapshot
+          - enterprise version only
+      Dump database configuration:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Database object count:
+        type: string
+        enum:
+        - supported
+        - not supported
+      Physical storage usage:
+        type: string
+        enum:
+        - supported
+        - not supported
+    additionalProperties: false
+additionalProperties: false
